@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./vmware-fix.nix
     ];
 
   # For claude/vscode, etc
@@ -126,7 +127,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
       fish
@@ -153,6 +154,14 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
+
+
+  # Gotta have docker of course
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
