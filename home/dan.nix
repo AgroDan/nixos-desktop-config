@@ -10,11 +10,13 @@
   home.packages = with pkgs; [
     fastfetch
     bat
-    sops
     age
     ansible
     kubectl
     talosctl
+    k9s
+    claude-code
+    sops
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -40,7 +42,9 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch";
+      rebuild = "sudo nixos-rebuild switch --flake ~/nixos-desktop-config/";
+      rebuild-boot = "sudo nixos-rebuild boot --flake ~/nixos-desktop-config/";
+      update = "nix flake update --flake ~/nixos-desktop-config/";
       k = "kubectl";
     };
     interactiveShellInit = ''
