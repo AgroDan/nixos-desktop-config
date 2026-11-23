@@ -78,7 +78,10 @@
     enable = true;
     desktopManager = {
       xterm.enable = false;
-      xfce.enable = true;
+      xfce = {
+        enable = true;
+        enableXfwm = true;
+      };
     };
   };
 
@@ -146,8 +149,8 @@
     wget
     openssl
     git
-    gnomeExtensions.dash-to-panel
-    gnome-tweaks
+    xfwm4
+    xfwm4-themes
   ];
 
   # this is its own separate thing?
