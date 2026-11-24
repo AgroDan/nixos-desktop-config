@@ -1,6 +1,9 @@
 {
   description = "A very basic flake";
   inputs = {
+    clipway = {
+      url = "github:krisztianfekete/clipway";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";

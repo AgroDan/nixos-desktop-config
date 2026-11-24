@@ -2,13 +2,14 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./vmware-fix.nix
+      inputs.clipway.nixosModules.default
     ];
 
   # For claude/vscode, etc
@@ -53,6 +54,13 @@
     headless = false;
   };
 
+  # thanks broadcom
+  services.clipway = {
+    enable = true;
+    # Defaults to graphical-session.target; override if needed:
+    # target = "hyprland-session.target";
+  };
+
 #  # GNOME
 #  services.displayManager.gdm.enable = true;
 #  services.desktopManager.gnome.enable = true;
@@ -73,19 +81,25 @@
 #    displayManager.lightdm.enable = true;
 #  };
 
-  # and finally, xfce
-  services.xserver = {
-    enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-        enableXfwm = true;
-      };
-    };
-  };
+#  # and finally, xfce
+#  services.xserver = {
+#    enable = true;
+#    desktopManager = {
+#      xterm.enable = false;
+#      xfce = {
+#        enable = true;
+#        enableXfwm = true;
+#      };
+#    };
+#  };
 
-  services.displayManager.defaultSession = "xfce";
+#  services.displayManager.defaultSession = "xfce";
+
+  # Cosmic, anyone?
+  services.displayManager.cosmic-greeter.enable = true;
+  services.desktopManager.cosmic.enable = true;
+  services.system76-scheduler.enable = true;
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   # Pipewire
   services.pulseaudio.enable = false;
