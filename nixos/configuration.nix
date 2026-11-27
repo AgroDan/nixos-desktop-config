@@ -95,11 +95,22 @@
 
 #  services.displayManager.defaultSession = "xfce";
 
-  # Cosmic, anyone?
-  services.displayManager.cosmic-greeter.enable = true;
-  services.desktopManager.cosmic.enable = true;
-  services.system76-scheduler.enable = true;
-  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+#  # Cosmic, anyone?
+#  services.displayManager.cosmic-greeter.enable = true;
+#  services.desktopManager.cosmic.enable = true;
+#  services.system76-scheduler.enable = true;
+#  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+
+  # KDE
+  services = {
+    desktopManager.plasma6.enable = true;
+
+    # Default display manager for plasma
+    displayManager.plasma-login-manager.enable = true;
+
+    # Optionally add xserver, may come back to this
+    # xserver.enable = true;
+  };
 
   # Pipewire
   services.pulseaudio.enable = false;

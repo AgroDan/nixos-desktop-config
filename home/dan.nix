@@ -17,6 +17,7 @@
     k9s
     claude-code
     sops
+    kubectx
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
